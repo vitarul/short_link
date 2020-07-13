@@ -5,7 +5,8 @@
 
     @if ($link)
         <div class="alert alert-info">
-            Ваша короткая ссылка создаа: <a href="{{ url($link->code) }}">{{ url($link->code) }}</a>
+            Ваша короткая ссылка создана: <a href="{{ url($link->code) }}">{{ url($link->code) }}</a><br>
+            Статистика переходов: <a href="{{ route('link.stats', $link) }}">{{ route('link.stats', $link) }}</a>
         </div>
     @endif
 

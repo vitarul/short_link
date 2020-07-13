@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LinkRequest;
+use App\Link;
 use App\Repositories\LinkRepository;
 use App\Services\LinkCodeGenerator;
 use Illuminate\Http\RedirectResponse;
@@ -40,5 +41,19 @@ class LinkController extends Controller
         $link = $this->linkRepository->createLink($data);
 
         return redirect(route('link.create'))->with(['link' => $link]);
+    }
+
+    public function statsLinkVisit(Link $link): View
+    {
+        $linkVisits = $this->linkRepository->getLinkVisitsWithPagination($link);
+
+        return view('linkStats', compact('linkVisits', 'link'));
+    }
+
+    public function statsLinks(): View
+    {
+        $linkStats = $this->linkRepository->getStatsLinksWithPagination();
+
+        return view('stats', compact('linkStats'));
     }
 }

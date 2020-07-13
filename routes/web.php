@@ -17,6 +17,8 @@ Route::get('/', 'LinkController@home')->name('link.create');
 Route::prefix('service')->group(function () {
     Route::get('/', 'LinkController@createLink')->name('link.create');
     Route::post('/link', 'LinkController@storeLink')->name('link.store');
+    Route::get('/link/{link}/stats', 'LinkController@statsLinkVisit')->name('link.stats');
+    Route::get('/stats', 'LinkController@statsLinks')->name('stats');
 });
 
 Route::get('/{linkCode}', 'LinkVisitController@visitLink')->name('link.visit');
